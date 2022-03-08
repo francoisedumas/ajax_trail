@@ -1,5 +1,15 @@
 class BetsController < ApplicationController
+  skip_before_action :authenticate_user!
   before_action :set_bet, only: %i[ show edit update destroy ]
+
+  def result
+    @bet = Bet.find(params[:id])
+    @result = params[:result]
+    @bet.result = @result
+    @bet.save
+    redirect_to bet_path(@bet)
+  end
+
 
   # GET /bets or /bets.json
   def index

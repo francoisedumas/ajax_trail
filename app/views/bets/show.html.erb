@@ -10,5 +10,20 @@
   <%= @bet.result %>
 </p>
 
+<% unless @bet.result %>
+  <%= link_to result_bet_path(@bet, result: "yes"), method: :patch do %>
+    <div class="btn-publication-yes">
+      <p>Publier OUI</p>
+    </div>
+  <% end %>
+  <%= link_to result_bet_path(@bet, result: "no"), method: :patch do %>
+    <div class="btn-publication-no mt-3">
+      <p>Publier NON</p>
+    </div>
+  <% end %>
+<% else %>
+  <p>Choix soumis</p>
+<% end %>
+
 <%= link_to 'Edit', edit_bet_path(@bet) %> |
 <%= link_to 'Back', bets_path %>
