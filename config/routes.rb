@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :bets do
     member do
-      patch :result
+      patch :close
     end
   end
   devise_for :users
