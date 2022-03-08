@@ -10,20 +10,27 @@
   <%= @bet.result %>
 </p>
 
-<% unless @bet.result %>
-  <%= link_to result_bet_path(@bet, result: "yes"), method: :patch do %>
-    <div class="btn-publication-yes">
-      <p>Publier OUI</p>
-    </div>
-  <% end %>
-  <%= link_to result_bet_path(@bet, result: "no"), method: :patch do %>
-    <div class="btn-publication-no mt-3">
-      <p>Publier NON</p>
-    </div>
-  <% end %>
-<% else %>
-  <p>Choix soumis</p>
-<% end %>
+<div data-controller="result-publisher">
+  <div data-result-publisher-target="container">
+    <% unless @bet.result %>
+      <%= link_to "#",
+        "data-id": @bet.id,
+        "data-result": "yes",
+        "data-action": "click->result-publisher#confirmResult" do %>
+        <div class="btn-publication-yes">
+          <p>Publier OUI</p>
+        </div>
+      <% end %>
+      <%= link_to close_bet_path(@bet, result: "no"), method: :patch do %>
+        <div class="btn-publication-no mt-3">
+          <p>Publier NON</p>
+        </div>
+      <% end %>
+    <% else %>
+      <p>Choix soumis</p>
+    <% end %>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_bet_path(@bet) %> |
 <%= link_to 'Back', bets_path %>

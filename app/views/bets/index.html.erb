@@ -13,7 +13,7 @@
 
   <tbody>
     <% @bets.each do |bet| %>
-      <tr>
+      <tr id="card-<%= bet.id %>">
         <td><%= bet.question %></td>
         <td><%= bet.result %></td>
         <td><%= link_to 'Show', bet %></td>
